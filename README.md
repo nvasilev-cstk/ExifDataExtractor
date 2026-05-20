@@ -69,7 +69,7 @@ GET /extract-exif?url={imageUrl}
 
 ### Prerequisites
 
-- Node.js 18+ (native `fetch` is required)
+- Node.js 20+ (native `fetch` is required)
 
 ### Install
 
@@ -103,8 +103,25 @@ curl "http://localhost:3000/extract-exif?url=https://example.com/photo.jpg"
 
 ## Configuration
 
-The port defaults to `3000` and is set in `server.js`. To change it, update the `PORT` constant or set an environment variable:
+The port defaults to `3000` locally. In production (e.g. Contentstack Launch), the `PORT` environment variable is set automatically and the server respects it:
 
 ```js
 const PORT = process.env.PORT || 3000;
 ```
+
+## Deploying to Contentstack Launch
+
+1. Push this repo to GitHub.
+2. In Contentstack Launch, create a new project and connect your GitHub repository.
+3. When prompted for framework settings, use the following:
+
+   | Setting          | Value           |
+   |------------------|-----------------|
+   | Framework Preset | Other           |
+   | Build Command    | `npm install`   |
+   | Output Directory | `.`             |
+   | Server Command   | `npm start`     |
+
+4. Click **Deploy**. Launch will install dependencies, start the server with `npm start`, and assign it a public URL.
+
+The server reads `PORT` from the environment automatically — no code changes are needed.

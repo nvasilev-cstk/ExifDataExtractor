@@ -2,7 +2,7 @@ const express = require('express');
 const ExifReader = require('exifreader');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.get('/extract-exif', async (req, res) => {
     const imageUrl = req.query.url;
